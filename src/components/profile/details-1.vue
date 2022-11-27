@@ -1,0 +1,74 @@
+<template>
+ <div id="container">
+    <div class="row">
+        <h3 class="label">Username</h3>
+        <input type="text" :v-bind="name" :placeholder='Username'>
+    </div>
+    <div class="row" style="margin-top:24px;">
+        <h3 class="label">Bio</h3>
+        <input type="text" :v-bind="status" placeholder="bio">
+    </div>
+ </div>   
+</template>
+
+<script>
+export default {
+    // these are the watchers to update
+    // the state on value change
+    computed:{
+        name(){
+            console.log('the value is changed')
+            return this.$store.getters['getUsername'];
+        }
+    },
+    data(){
+        return{
+            user_name:'',
+            status:''
+        }
+    },
+methods:{
+    
+}
+}
+</script>
+
+<style scoped>
+#container{
+    width:100vw;
+    height:180px;
+    overflow-x:hidden !important;
+}
+.row{
+    position: inherit;
+    width:100vw;
+    max-height:60px;
+    margin-top:12px;
+}
+
+h3{
+    margin-left:5vw;
+    font-size:18px;
+    font-weight: 400;
+    font-style: oblique;
+     font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
+}
+input{
+    width:90vw;
+    margin-left:8vw;
+    height:5vh;
+    min-height:35px;
+    border-radius:6px;
+    margin-top:4px;
+    font-size:16px;
+    font-weight:400;
+    font-style: italic;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    outline:none;
+    border:2px solid rgba(0, 0, 0, 0.668);
+}
+input:focus,input::selection{
+border-color: purple;
+outline:none;
+}
+</style>
