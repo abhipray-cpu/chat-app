@@ -29,7 +29,7 @@ export default {
             });
             context.commit('setLoader', { value: false });
             context.commit('setUsername', { value: payload.userName })
-            context.dispatch('getUserDetails')
+            router.push({ name: 'profile' })
 
         } catch (err) {
             console.log(err);
@@ -174,9 +174,5 @@ export default {
     async updateUser(context, payload) {
         console.log(payload);
     },
-    // this function will redirect the user to profile section after creation
-    async getUserDetails() {
-        router.push({ name: 'profile' })
-    }
-
+    
 }

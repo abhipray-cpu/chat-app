@@ -2,7 +2,7 @@
  <div id="container">
     <div class="row">
         <h3 class="label">Username</h3>
-        <input type="text" :v-bind="name" :placeholder='Username'>
+        <input type="text" :placeholder="name" readonly>
     </div>
     <div class="row" style="margin-top:24px;">
         <h3 class="label">Bio</h3>
@@ -17,19 +17,18 @@ export default {
     // the state on value change
     computed:{
         name(){
-            console.log('the value is changed')
-            return this.$store.getters['getUsername'];
+            return this.user_name
         }
     },
     data(){
         return{
-            user_name:'',
+            user_name:this.$store.getters.getUsername,
             status:''
         }
     },
 methods:{
-    
-}
+  
+},
 }
 </script>
 

@@ -1,6 +1,6 @@
  <template>
     <div id="container">
-      <b-icon icon="check2" id="confirm"></b-icon>
+      <b-icon icon="check2" id="confirm" @click="redirect"></b-icon>
         <profile-image></profile-image>
     <user-details></user-details>
     <gender-comp></gender-comp>
@@ -29,6 +29,7 @@
     },
     methods:{
       redirect(){
+         console.log(this.$store.getters.getStatus)
       }
     }
  }

@@ -6,8 +6,6 @@ export default {
         state.newGroup = page;
     },
     setUsername(state, username) {
-        console.log('this is from the mutation');
-        console.log(username)
         state.userName = username.value;
     },
     setPassword(state, password) {
