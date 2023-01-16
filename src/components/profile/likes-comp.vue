@@ -1,6 +1,7 @@
 <template>
     <div id="container">
-<h3 id="likes">Likes</h3>
+<h3 id="likes">Likes <span style="color:rgba(0,0,0,0.6);font-style: italic;">(Atleast 5)</span>
+</h3>
     <div id="flex">
         <div v-for="like in likes" :key="like" class="chip">
          <h4>{{like.slice(0,25)}} <span><b-icon icon="x-lg" class="icon" @click="removeLike(like)"></b-icon></span></h4>
@@ -27,6 +28,7 @@ export default {
     methods:{
         removeLike(index){
             this.like=this.like.filter(val=>val!=index);
+            this.$store.commit('setLikes',{value:this.like})
         },
         addLike(){
             if(this.like.includes(this.add)|| this.likes.length >= 5)
@@ -34,7 +36,8 @@ export default {
             else
             {
                 this.like.push(this.add);
-            this.add='';
+                this.add='';
+                this.$store.commit('setLikes',{value:this.like})
             }
         },
         goto(refName) {
@@ -51,10 +54,10 @@ export default {
 <style scoped>
 #container{
     width:100vw;
-    margin-top:15px;
+    margin-top:20px;
     height:fit-content;
     min-height:100px;
-    
+    margin-bottom:15px;
 }
 
 #flex{

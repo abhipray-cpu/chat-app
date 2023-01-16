@@ -27,6 +27,7 @@ Vue.config.productionTip = false
 import drag from "v-drag"
 Vue.use(drag);
 // fireabase
+
 new Vue({
     BootstrapVue,
     router,

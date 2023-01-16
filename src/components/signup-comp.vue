@@ -30,6 +30,7 @@ import { parseSync } from '@babel/core';
           :class="[errorStyle==1?'error':'']"
           placeholder="@email"
           required>
+          <!---good thing we don't need to hash password firebase does it automatically-->
         <input  
         v-model="password"
          type="password"
@@ -57,22 +58,12 @@ import { parseSync } from '@babel/core';
             <h5 id="help" @click="help"></h5>
         </div>
        <b-button id="btn" class="shadow-none" @click="signup">Signup</b-button>
-       <h1 id="or">OR</h1>
-        <div id="google" @click="googleSignup">
-            <b-icon icon="google" style="width: 50px; height: 50px; color:#EA4335;"></b-icon>
-            <h2 class="alternate">Signup with google</h2>
-        </div>
-        <div id="facebook" @click="facebookSignup">
-            <b-icon icon="facebook" style="width: 50px; height: 50px;color:#221983;;"></b-icon>
-            <h2 class="alternate">Signup with facebook</h2>
-        </div>
      <span><h4 id="signup">Already have an account</h4> <h1 id="link" @click="signin">Signin</h1></span>
        </b-overlay>
     </div>
 </template>
 
 <script>
-
 
 export default {
     watch:{
@@ -268,36 +259,40 @@ input{
     margin-top:10%;
     margin-left:7vw;
     width:86vw;
-    font-size:19px;
+    font-size:24px;
+    font-weight: 500;
+    font-style: italic;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-weight: 400;
 
 }
 #email{
     margin-top:28%;
     margin-left:7vw;
     width:86vw;
-    font-size:19px;
+    font-size:24px;
+    font-weight: 500;
+    font-style: italic;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-weight: 400;
 
 }
 #password{
     margin-top:46%;
     margin-left:7vw;
     width:86vw;
-    font-size:19px;
+    font-size:24px;
+    font-weight: 500;
+    font-style: italic;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-weight: 400;
 
 }
 #confirm{
     margin-top:67%;
     margin-left:7vw;
     width:86vw;
-    font-size:19px;
+    font-size:24px;
+    font-weight: 500;
+    font-style: italic;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-weight: 400;
 
 }
 #help{

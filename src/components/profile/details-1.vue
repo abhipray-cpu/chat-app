@@ -2,11 +2,11 @@
  <div id="container">
     <div class="row">
         <h3 class="label">Username</h3>
-        <input type="text" :placeholder="name" readonly>
+        <input type="text" :placeholder="name" v-model="user_name" v-on:input="updateUsername">
     </div>
     <div class="row" style="margin-top:24px;">
         <h3 class="label">Bio</h3>
-        <input type="text" :v-bind="status" placeholder="bio">
+        <input type="text" v-model="user_status" :placeholder="status" v-on:input="updateStatus">
     </div>
  </div>   
 </template>
@@ -18,17 +18,31 @@ export default {
     computed:{
         name(){
             return this.user_name
+        },
+        status(){
+            return this.user_status
         }
     },
     data(){
         return{
-            user_name:this.$store.getters.getUsername,
-            status:''
+            user_name:'',
+            user_status:''
         }
     },
 methods:{
-  
+    // these functions will directly update the states
+  updateUsername(){
+
+    this.$store.commit('setUsername',{value:this.user_name})
+  },
+  updateStatus(){
+    this.$store.commit('setStatus',{value:this.status})
+  }
 },
+mounted(){
+    this.user_name=this.$store.getters.getUsername
+    this.user_status=this.$store.getters.getStatus
+}
 }
 </script>
 

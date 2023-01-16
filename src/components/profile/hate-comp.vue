@@ -1,7 +1,7 @@
 import index from 'vue-meta';
 <template>
     <div id="container">
-<h3 id="likes">Hates</h3>
+<h3 id="likes">Hates<span style="color:rgba(0,0,0,0.6);font-style: italic;">(Atleast 5)</span></h3>
     <div id="flex">
         <div v-for="like in likes" :key="like" class="chip">
          <h4>{{like.slice(0,25)}} <span><b-icon icon="x-lg" class="icon" @click="removeLike(like)"></b-icon></span></h4>
@@ -28,6 +28,7 @@ export default {
     methods:{
         removeLike(index){
             this.like=this.like.filter(val=>val!=index);
+            this.$store.commit('setDislikes',{value:this.like})
         },
         addLike(){
             if(this.like.includes(this.add) || this.likes.length >= 5)
@@ -35,7 +36,8 @@ export default {
             else
             {
                 this.like.push(this.add);
-            this.add='';
+                this.$store.commit('setDislikes',{value:this.like})
+                this.add='';
             }
         },
         goto(refName) {

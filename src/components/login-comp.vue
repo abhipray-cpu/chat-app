@@ -36,15 +36,6 @@
             <h5 id="help" @click="help">get help with login</h5>
         </div>
        <b-button id="btn" class="shadow-none" @click="login">Login</b-button>
-       <h1 id="or">OR</h1>
-        <div id="google" @click="googleLogin">
-            <b-icon icon="google" style="width: 50px; height: 50px; color:#EA4335;"></b-icon>
-            <h2 class="alternate">Signin with google</h2>
-        </div>
-        <div id="facebook" @click="facebookLogin">
-            <b-icon icon="facebook" style="width: 50px; height: 50px;color:#221983;;"></b-icon>
-            <h2 class="alternate">Signin with facebook</h2>
-        </div>
      <span><h4 id="signup">Don't have an account</h4> <h1 id="link" @click="signup">Signup</h1></span>
         </b-overlay>
     </div>
@@ -107,12 +98,6 @@ alertState(){
                 this.$store.commit('setLoader',{value:false})
             }
         },
-        googleLogin(){
-            console.log('google login');
-        },
-        facebookLogin(){
-            console.log('facebook login')
-        },
         help(){
             console.log('login help!');
         },
@@ -156,11 +141,19 @@ border-radius: 13px;
     margin-top:40px;
     margin-left:4vw;
     width:92vw;
+    font-size:24px;
+    font-weight: 500;
+    font-style: italic;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 #password{
     margin-top:110px;
     margin-left:4vw;
     width:92vw;
+    font-size:24px;
+    font-weight: 500;
+    font-style: italic;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 #help{
     margin-top:196px;

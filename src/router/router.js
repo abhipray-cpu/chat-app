@@ -11,6 +11,7 @@ import NewGroup from '../views/new-group.vue'
 import ChatPage from '../views/chat-page.vue'
 import WelcomePage from '../views/welcom-page.vue'
 import GroupPage from '../views/group-chats.vue'
+import InterestsPage from '../views/interests-page.vue'
 Vue.use(Router)
 export default new Router({
     mode: 'history',
@@ -44,6 +45,11 @@ export default new Router({
             name: 'profile',
             path: '/profile',
             component: ProfilePage
+        },
+        {
+            name:'Interests',
+            path: '/interests',
+            component: InterestsPage
         },
         {
             name: 'requests',

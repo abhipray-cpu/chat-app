@@ -173,6 +173,6 @@ export default {
     // this function is for updating the user data
     async updateUser(context, payload) {
         console.log(payload);
-    },
+    }
     
 }
