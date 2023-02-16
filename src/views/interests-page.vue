@@ -117,6 +117,8 @@ export default {
         redirect(){
             if(this.hobbies.length < 5)
             this.error=1;
+            else
+            this.$store.dispatch('updateUser',{'interests':this.hobbies})
             //will invoke a action in this step
         },
         doSomething(index){
@@ -257,5 +259,6 @@ alertState(){
    padding:0px;
    line-height: 5vh;
    margin-bottom:27.5px;
+   margin-top:6px;
 }
 </style>

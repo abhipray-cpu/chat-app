@@ -106,7 +106,7 @@ input{
     min-height:35px;
     border-radius:6px;
     margin-top:4px;
-    font-size:16px;
+    font-size:20px;
     font-weight:400;
     font-style: italic;
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;

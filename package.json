@@ -11,6 +11,7 @@
     },
     "dependencies": {
         "axios": "^0.27.2",
+        "bcryptjs": "^2.4.3",
         "bootstrap": "^5.2.0",
         "bootstrap-vue": "^2.22.0",
         "core-js": "^3.8.3",
@@ -60,15 +61,17 @@
             "parser": "@babel/eslint-parser"
         },
         "rules": {},
-        "overrides": [{
-            "files": [
-                "**/__tests__/*.{j,t}s?(x)",
-                "**/tests/unit/**/*.spec.{j,t}s?(x)"
-            ],
-            "env": {
-                "mocha": true
+        "overrides": [
+            {
+                "files": [
+                    "**/__tests__/*.{j,t}s?(x)",
+                    "**/tests/unit/**/*.spec.{j,t}s?(x)"
+                ],
+                "env": {
+                    "mocha": true
+                }
             }
-        }]
+        ]
     },
     "browserslist": [
         "> 1%",

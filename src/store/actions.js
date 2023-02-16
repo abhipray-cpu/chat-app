@@ -1,7 +1,8 @@
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { db } from '/src/firebase.js'
-import { doc, setDoc } from "firebase/firestore";
-import { collection, query, where, getDocs } from "firebase/firestore";
+import { doc,setDoc} from "firebase/firestore";
+import { collection, query, where, getDocs} from "firebase/firestore";
+import bcrypt from "bcryptjs";
 import router from '../router/router'
 /*
 
@@ -16,16 +17,30 @@ export default {
     async signup(context, payload) {
         const auth = getAuth();
         context.commit('setLoader', { value: true });
+        try{
+            var hashedPassword  = await bcrypt.hash(payload.password,13)
+         //yes this works use it in the password change function   console.log(bcrypt.compare(payload.password,hashedPassword));
+            }
+            catch(err){
+                console.log(err)
+                console.log('failed to hash the password!');
+            context.commit('setLoader', { value: false });
+            context.commit('setSignupState', { value: true });
+            router.push({ name: 'signup' })
+            }
         try {
+            
             const user = await createUserWithEmailAndPassword(auth, payload.mail, payload.password)
             await setDoc(doc(db, "users", `${user._tokenResponse.localId}`), {
                 "username": payload.userName,
-                "password": payload.password,
+                "password": hashedPassword,
                 "mail": payload.mail,
+                "gender":"",
                 'bio': '',
                 'likes': [],
                 'hates': [],
-                'hobbies': []
+                'hobbies': [],
+                'suggestions': []
             });
             context.commit('setLoader', { value: false });
             context.commit('setUsername', { value: payload.userName })
@@ -76,6 +91,7 @@ export default {
     async login(context, payload) {
         const auth = getAuth();
         try {
+            //this is just a simple check and will be used in some other cases when user wants to change password
             const user = await signInWithEmailAndPassword(auth, payload.email, payload.password);
             localStorage.setItem('token', user._tokenResponse.idToken);
             localStorage.setItem('expires', user._tokenResponse.expiresIn);
@@ -171,8 +187,45 @@ export default {
         context.commit('setAuth', { value: false });
     },
     // this function is for updating the user data
-    async updateUser(context, payload) {
-        console.log(payload);
-    }
+    async updateUser(context,payload){
+        let userName = context.getters['getUsername']
+        let bio = context.getters['getStatus']
+        let gender = context.getters['getGender']
+        let likes = context.getters['getLikes']
+        let dislikes = context.getters['getDislikes']
+         let interests = payload.interests
+         console.log(interests)
+         const q = query(collection(db, "users"), where("username", "==", userName));
+            let user = await getDocs(q);
+            const docId = user.docs[0].id
+
+        try {
+            await db.collection('users').doc(docId).update({
+                bio:bio,
+                likes:likes,
+                hates:dislikes,
+                hobbies:interests,
+                gender:gender
+            })
+
+            router.push({name:'login'})
+        } catch (err) {
+            // need to handle error here
+            console.log('no such doc found')
+            console.log(err);
+            router.push({name:'profile'})
+
+            // in this case we will delete the document and rewrite the user to signup page
+
+        }
+
+        //update the fetched document
+        
+    },
+    // this action is for uploading the image to firebase
+    async updateImage(){}
+   // need to create a backup function to delete the doc if the process fails
     
 }
+
+ 

@@ -46,7 +46,7 @@
          // dispatch action when all the checks are passed
          if(this.likesCheck() && this.dislikesCheck())
          {
-            console.log('all ok!')
+            this.$router.push({name:'Interests'})
          }
       },
       likesCheck(){
@@ -127,5 +127,6 @@
    padding:0px;
    line-height: 5vh;
    margin-bottom:27.5px;
+   margin-top:10px;
 }
  </style>

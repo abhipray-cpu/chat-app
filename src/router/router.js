@@ -1,3 +1,4 @@
+// make sure to protect routes before production
 import Vue from 'vue'
 import Router from 'vue-router'
 import LoginPage from '../components/login-comp.vue';
@@ -19,6 +20,7 @@ export default new Router({
             name: 'login',
             path: '/login',
             component: LoginPage
+            
         },
         {
             name: 'signup',
