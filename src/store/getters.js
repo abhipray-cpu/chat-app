@@ -38,6 +38,9 @@ export default {
     },
     getHobbies(state) {
         return state.hobbies;
+    },
+    getProfileImage(state){
+        return state.profileImage
     }
 
 

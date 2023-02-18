@@ -44,5 +44,8 @@ export default {
     },
     setHobbies(state, payload) {
         state.hobbies = payload.value;
+    },
+    setProfileImage(state,payload){
+        state.profileImage = payload.value
     }
 }

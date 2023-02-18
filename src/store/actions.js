@@ -40,7 +40,8 @@ export default {
                 'likes': [],
                 'hates': [],
                 'hobbies': [],
-                'suggestions': []
+                'suggestions': [],
+                'image':''
             });
             context.commit('setLoader', { value: false });
             context.commit('setUsername', { value: payload.userName })
@@ -205,7 +206,8 @@ export default {
                 likes:likes,
                 hates:dislikes,
                 hobbies:interests,
-                gender:gender
+                gender:gender,
+                image:context.getters.getProfileImage
             })
 
             router.push({name:'login'})
