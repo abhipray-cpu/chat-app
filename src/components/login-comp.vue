@@ -58,48 +58,48 @@ export default {
     },
     loading(){
    
-   return this.$store.getters['getLoader'];
+   return this.$store.getters['auth/getLoader'];
 },
 alertState(){
-    return this.$store.getters['getLoginError']
+    return this.$store.getters['auth/getLoginError']
 },
    },
     methods:{
         async login(){
-            this.$store.commit('setLoader',{value:true})
-            const email = await this.$store.dispatch('getMail',{userName:this.userName})
+            this.$store.commit('auth/setLoader',{value:true})
+            const email = await this.$store.dispatch('auth/getMail',{userName:this.userName})
             if(email.status === 'OK')
             {
-                let res = await this.$store.dispatch('login',{email:email.mail,
+                let res = await this.$store.dispatch('auth/login',{email:email.mail,
                 password:this.password})
                 if(res.status=="password")
                 {
                     this.error=1;
                     this.password="wrong password";
-                    this.$store.commit('setLoader',{value:false})
+                    this.$store.commit('auth/setLoader',{value:false})
                 }
                 else if(res.staus=="system")
                 {  
-                    this.$store.commit('setLoginError',{value:true});
-                    this.$store.commit('setLoader',{value:false})
-                    setTimeout(this.$store.commit('setLoginError',{value:true}),2000);
+                    this.$store.commit('auth/setLoginError',{value:true});
+                    this.$store.commit('auth/setLoader',{value:false})
+                    setTimeout(this.$store.commit('auth/setLoginError',{value:true}),2000);
                 }
             else
             {
                 this.userName='';
             this.password='';
-            this.$store.commit('setLoader',{value:false})
+            this.$store.commit('auth/setLoader',{value:false})
             }
             }
             else
             {
                 this.error=0; // the username is wrong
                 this.userName='No such user!'
-                this.$store.commit('setLoader',{value:false})
+                this.$store.commit('auth/setLoader',{value:false})
             }
         },
         help(){
-            console.log('login help!');
+            this.$router.push({name:'forgot'})
         },
         formReset(){
             console.log('form reset')

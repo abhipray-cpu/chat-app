@@ -33,15 +33,15 @@ methods:{
     // these functions will directly update the states
   updateUsername(){
 
-    this.$store.commit('setUsername',{value:this.user_name})
+    this.$store.commit('auth/setUsername',{value:this.user_name})
   },
   updateStatus(){
-    this.$store.commit('setStatus',{value:this.status})
+    this.$store.commit('auth/setStatus',{value:this.status})
   }
 },
 mounted(){
-    this.user_name=this.$store.getters.getUsername
-    this.user_status=this.$store.getters.getStatus
+    this.user_name=this.$store.getters['auth/getUsername']
+    this.user_status=this.$store.getters['auth/getStatus']
 }
 }
 </script>

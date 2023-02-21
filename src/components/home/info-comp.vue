@@ -1,9 +1,10 @@
 <template>
     <div id="container">
-        <b-img  src="https://static.abplive.com/wp-content/uploads/sites/2/2018/05/26165746/modi-sad-4.jpg" id="profile" rounded="circle" alt="Username"></b-img>
+        <b-img v-if="userImage == ''" :src="require('/src/assets/profile1.jpg')" id="profile" rounded="circle" :alt="userName"></b-img>
+        <b-img  :src="userImage" id="profile" rounded="circle" :alt="userName" v-else></b-img>
       
-      <h2 id="username">Modiji</h2>
-      <h3 id="bio">God said be fruitful and multiply</h3>
+      <h2 id="username">{{userName}}</h2>
+      <h3 id="bio">{{userStatus}}}</h3>
     <b-button id="suggestion" @click="suggestion">Suggestions</b-button>
     <b-button id="friend" @click="friend">Friends</b-button>
     </div>
@@ -12,8 +13,23 @@
 <script>
 
 export default {
-    components:{
-      
+    data(){
+      return{
+        image:'',
+        name:'',
+        status:''
+      }
+    },
+    computed:{
+         userImage(){
+          return this.image
+         },
+         userName(){
+          return this.name
+         },
+         userStatus(){
+          return this.status
+         }
     },
     methods:{
       suggestion(){
@@ -22,6 +38,20 @@ export default {
       friend(){
         this.$router.push({name: 'friends'});
       }
+    },
+    async mounted(){
+      
+      this.image = this.$store.getters['auth/getProfileImage']
+      this.name = this.$store.getters['auth/getUsername']
+      this.status = this.$store.getters['auth/getStatus']
+
+      if(this.image == '' || this.name == '' || this.status == ''){
+        await this.$store.dispatch('auth/userHome')
+        this.image = this.$store.getters['auth/getProfileImage']
+      this.name = this.$store.getters['auth/getUsername']
+      this.status = this.$store.getters['auth/getStatus']
+      }
+
     }
 }
 </script>
@@ -47,7 +77,7 @@ filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.25));
 }
 #username{
 position: relative;
-width: 30vw;
+width: 50vw;
 height: 6vh;
 left:32vw ;
 top:6px;

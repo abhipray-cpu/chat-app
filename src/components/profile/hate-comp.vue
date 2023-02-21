@@ -28,7 +28,7 @@ export default {
     methods:{
         removeLike(index){
             this.like=this.like.filter(val=>val!=index);
-            this.$store.commit('setDislikes',{value:this.like})
+            this.$store.commit('auth/setDislikes',{value:this.like})
         },
         addLike(){
             if(this.like.includes(this.add) || this.likes.length >= 5)
@@ -36,12 +36,12 @@ export default {
             else
             {
                 this.like.push(this.add);
-                this.$store.commit('setDislikes',{value:this.like})
+                this.$store.commit('auth/setDislikes',{value:this.like})
                 this.add='';
             }
         },
         goto(refName) {
-            console.log('the click is event is captured')
+           // console.log('the click is event is captured')
       var element = this.$refs[refName];
       var top = element.offsetTop;
       

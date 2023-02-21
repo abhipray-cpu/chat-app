@@ -28,7 +28,7 @@ export default {
     methods:{
         removeLike(index){
             this.like=this.like.filter(val=>val!=index);
-            this.$store.commit('setLikes',{value:this.like})
+            this.$store.commit('auth/setLikes',{value:this.like})
         },
         addLike(){
             if(this.like.includes(this.add)|| this.likes.length >= 5)
@@ -37,7 +37,7 @@ export default {
             {
                 this.like.push(this.add);
                 this.add='';
-                this.$store.commit('setLikes',{value:this.like})
+                this.$store.commit('auth/setLikes',{value:this.like})
             }
         },
         goto(refName) {

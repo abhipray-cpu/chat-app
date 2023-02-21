@@ -26,8 +26,21 @@ Vue.use(VueMeta, {
 Vue.config.productionTip = false
 import drag from "v-drag"
 Vue.use(drag);
-// fireabase
+// logger
 
+import VueLogger from 'vuejs-logger';
+const isProduction = process.env.NODE_ENV === 'production';
+ 
+const options = {
+    isEnabled: true,
+    logLevel : isProduction ? 'error' : 'debug',
+    stringifyArguments : false,
+    showLogLevel : true,
+    showMethodName : true,
+    separator: '|',
+    showConsoleColors: true
+};
+Vue.use(VueLogger,options)
 new Vue({
     BootstrapVue,
     router,

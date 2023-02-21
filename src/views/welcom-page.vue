@@ -10,7 +10,7 @@
 export default {
    methods:{
    async redirect(){
-        let res=await this.$store.dispatch('autoLogin');
+        let res=await this.$store.dispatch('auth/autoLogin');
         if(res!=true)
         this.$router.push({name:'login'});
     }

@@ -18,7 +18,8 @@ export default {
         data(){
             return {
                 img1: '',
-                imageData: null
+                imageData: null,
+                default:'/src/assets/profile1.jpg'
             }
         } ,
         methods:{
@@ -34,21 +35,28 @@ previewImage(event) {
 onUpload(){
   try{
     this.img1=null;
-  const storageRef=firebase.storage().ref(`${this.imageData.name}`).put(this.imageData);
+    if(this.imageData != null)
+    {
+      const storageRef=firebase.storage().ref(`${this.imageData.name}`).put(this.imageData);
   storageRef.on(`state_changed`,snapshot=>{
   this.uploadValue = (snapshot.bytesTransferred/snapshot.totalBytes)*100;
     }, error=>{console.log(error.message)},
   ()=>{this.uploadValue=100;
       storageRef.snapshot.ref.getDownloadURL().then((url)=>{
           this.img1 =url;
-          this.$store.commit('setProfileImage',{value:this.img1})
+          this.$store.commit('auth/setProfileImage',{value:this.img1})
         });
       }      
     )
+    }
+    else{
+      this.$store.commit('auth/setProfileImage',{value:''})
+    }
+
   }
   catch(err){
     console.log("unable to upload to cloud storage")
-    console.log(err)
+    this.$log.error(`${err} in the profile pic comp`)
   }
  },
         }

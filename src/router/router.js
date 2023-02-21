@@ -13,19 +13,31 @@ import ChatPage from '../views/chat-page.vue'
 import WelcomePage from '../views/welcom-page.vue'
 import GroupPage from '../views/group-chats.vue'
 import InterestsPage from '../views/interests-page.vue'
+import ForgotPage from '../components/forgot-password.vue'
 Vue.use(Router)
 export default new Router({
     mode: 'history',
-    routes: [{
+    routes: [
+        
+        {
+            name:'forgot',
+            path:'/forgot',
+            component:ForgotPage
+        }
+        ,
+        {
             name: 'login',
             path: '/login',
-            component: LoginPage
+            component: LoginPage,
+           
             
         },
         {
             name: 'signup',
             path: '/signup',
-            component: SignupPage
+            component: SignupPage,
+           
+
         },
         {
             name: 'home',
@@ -46,7 +58,8 @@ export default new Router({
         {
             name: 'profile',
             path: '/profile',
-            component: ProfilePage
+            component: ProfilePage,
+            
         },
         {
             name:'Interests',

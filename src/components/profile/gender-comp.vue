@@ -52,11 +52,11 @@ export default {
     methods:{
         changeSeletion(value){
             this.selection = value;
-            this.$store.commit('setGender',{value:value})
+            this.$store.commit('auth/setGender',{value:value})
         }
     },
     mounted(){
-        this.selection = this.$store.getters.getGender
+        this.selection = this.$store.getters['auth/getGender']
     }
 }
 </script>

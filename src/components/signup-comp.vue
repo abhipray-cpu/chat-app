@@ -94,11 +94,11 @@ errorStyle(){
     return this.error;
 },
 alertState(){
-    return this.$store.getters['getSignupError']
+    return this.$store.getters['auth/getSignupError']
 },
 loading(){
    
-    return this.$store.getters['getLoader'];
+    return this.$store.getters['auth/getLoader'];
 },
 color(){
 return this.strength;
@@ -108,14 +108,14 @@ return this.strength;
         async signup(){
             // these are the signup credentials validatdations
             // that user must validate
-            this.$store.commit('setLoader',{value:true})
+            this.$store.commit('auth/setLoader',{value:true})
             const approve1 = await this.signupCheck2();
             const approve2 = await this.signupCheck3();
             const approve3 = this.minLenght();
             const approve4 = this.signupCheck1();
             if(approve1 && approve2 && approve3 && approve4)
            {
-             await this.$store.dispatch('signup',{
+             await this.$store.dispatch('auth/signup',{
                 userName:this.userName,
                 password:this.password,
                 mail:this.mail,
@@ -135,7 +135,7 @@ return this.strength;
                this.password='password do not match';
                this.confirm='password do not match';
                this.inputState=false;
-               this.$store.commit('setLoader',{value:false})
+               this.$store.commit('auth/setLoader',{value:false})
                return false;
             }
             else
@@ -147,25 +147,25 @@ return this.strength;
         
         // this will change whether mail is taken or not
         async signupCheck2(){
-            let response = await this.$store.dispatch('checkEmail',{'email':this.mail});
+            let response = await this.$store.dispatch('auth/checkEmail',{'email':this.mail});
          console.log(response)
             if(response == false)
          { 
             this.mail="mail in use"
             this.error=1;
-            this.$store.commit('setLoader',{value:false})
+            this.$store.commit('auth/setLoader',{value:false})
          }
          return response;
         },
         // this will check whether user is taken or not
         async signupCheck3(){
-            let response = await this.$store.dispatch('checkUser',{'name':this.userName});
+            let response = await this.$store.dispatch('auth/checkUser',{'name':this.userName});
             console.log(response);
             if(response==false)
             { 
                 this.userName="Username taken"
                 this.error=0;
-                this.$store.commit('setLoader',{value:false})
+                this.$store.commit('auth/setLoader',{value:false})
             }
             return response;
         },
@@ -196,7 +196,7 @@ minLenght(){
     return false;
     }
     else
-    {  this.$store.commit('setLoader',{value:false})
+    {  this.$store.commit('auth/setLoader',{value:false})
         return true;
     }
 },
@@ -219,9 +219,9 @@ minLenght(){
         }
     },
     async mounted(){
-        if(this.$store.getters['getSignupError'])
+        if(this.$store.getters['auth/getSignupError'])
         {
-            setTimeout(this.$store.commit('setSignupState',{value:true}),
+            setTimeout(this.$store.commit('auth/setSignupState',{value:true}),
             2000)
         }
     }

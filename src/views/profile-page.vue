@@ -50,7 +50,7 @@
          }
       },
       likesCheck(){
-         let likes = this.$store.getters.getLikes
+         let likes = this.$store.getters['auth/getLikes']
          if(likes.length !== 5)
          {
             return false
@@ -58,7 +58,7 @@
          return true
       },
       dislikesCheck(){
-         let dislikes = this.$store.getters.getDislikes
+         let dislikes = this.$store.getters['auth/getDislikes']
          if(dislikes.length !== 5)
          {
             return false

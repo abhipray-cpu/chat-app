@@ -118,7 +118,7 @@ export default {
             if(this.hobbies.length < 5)
             this.error=1;
             else
-            this.$store.dispatch('updateUser',{'interests':this.hobbies})
+            this.$store.dispatch('auth/updateUser',{'interests':this.hobbies})
             //will invoke a action in this step
         },
         doSomething(index){
